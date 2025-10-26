@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROX Shadow Equipment Upgrade Helper</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #007bff;
+            text-align: center;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #fafafa;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .input-group input[type="number"],
+        .input-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .checkbox-group input {
+            margin-right: 10px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        #result {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 4px;
+            border: 2px solid #007bff;
+            min-height: 50px;
+            font-size: 1.1em;
+            line-height: 1.5;
+        }
+        .recommendation-worth {
+            background-color: #d4edda;
+            color: #155724;
+            border-color: #c3e6cb;
+        }
+        .recommendation-not-worth {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-color: #f5c6cb;
+        }
+        .cost-summary {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ROX Shadow Equipment Upgrade Helper</h1>
+        <p>Determine if using Blessing Marks to boost your Shadow Equipment upgrade success rate is economically worth it.</p>
+
+        <div class="input-group">
+            <label>Upgrade Parameters (e.g., SE5 → SE6)</label>
+            <label for="baseSuccessRate">Base Success Rate (%)</label>
+            <input type="number" id="baseSuccessRate" value="50" min="0" max="100">
+            <p style="font-size: 0.8em; color: #666;">*Typical SE5 → SE6 base rate is 50%.</p>
+        </div>
+
+        <div class="input-group">
+            <label>Material Cost (Without Blessing Mark)</label>
+            <label for="materialCostPerUnit">Cost per Material Unit (Crystals)</label>
+            <input type="number" id="materialCostPerUnit" value="16000" min="0">
+            <label for="materialQuantity">Quantity of Materials Needed</label>
+            <input type="number" id="materialQuantity" value="220" min="1">
+            <div class="cost-summary" id="materialTotalCost">Total Material Cost: 3,520,000 Crystals</div>
+        </div>
+
+        <div class="input-group">
+            <label>Blessing Mark Cost & Effect</label>
+            <label for="markCostPerUnit">Cost per Blessing Mark (Crystals)</label>
+            <input type="number" id="markCostPerUnit" value="10000" min="0">
+            <label for="markQuantity">Quantity of Marks Needed</label>
+            <input type="number" id="markQuantity" value="120" min="0">
+            <label for="markSuccessBonus">Success Rate Bonus from Marks (%)</label>
+            <input type="number" id="markSuccessBonus" value="16" min="0" max="100">
+            <div class="cost-summary" id="markTotalCost">Total Blessing Mark Cost: 1,200,000 Crystals</div>
+        </div>
+
+        <div class="input-group">
+            <label>Account Bonuses</label>
+            <label for="failureBonus">Failure Bonus from Previous Attempts (%)</label>
+            <input type="number" id="failureBonus" value="0" min="0" max="100">
+            <div class="checkbox-group">
+                <input type="checkbox" id="vip3Active">
+                <label for="vip3Active">VIP 3 Active (+5% Success Rate Bonus)</label>
+            </div>
+        </div>
+
+        <button onclick="calculateUpgrade()">Calculate Recommendation</button>
+
+        <div id="result">
+            <p>Enter your current values and click "Calculate Recommendation" to see the analysis.</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
